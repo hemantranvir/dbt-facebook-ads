@@ -19,6 +19,7 @@ joined as (
 
     select 
         report.date_day,
+        accounts.clerk_org_id,
         accounts.account_id,
         accounts.account_name,
         accounts.account_status,

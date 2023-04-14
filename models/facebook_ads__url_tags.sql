@@ -11,6 +11,7 @@ required_fields as (
 
     select
         _fivetran_id,
+        clerk_org_id,
         creative_id,
         url_tags
     from base

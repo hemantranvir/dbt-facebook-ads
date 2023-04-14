@@ -8,6 +8,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           json_extract_array(replace(trim(url_tags, '"'),'\\','')) as cleaned_url_tags
       from required_fields
@@ -28,6 +29,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           json_extract_scalar(url_tag_element, '$.key') as key,
           json_extract_scalar(url_tag_element, '$.value') as value,
@@ -43,6 +45,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           replace(trim(url_tags::text, '"'),'\\','')::json as cleaned_url_tags
       from required_fields
@@ -63,6 +66,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           url_tag_element->>'key' as key,
           url_tag_element->>'value' as value,
@@ -84,6 +88,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           json_extract_array_element_text(required_fields.url_tags, numbers.generated_number::int - 1, true) as element
       from required_fields
@@ -95,6 +100,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           json_extract_path_text(element,'key') as key,
           json_extract_path_text(element,'value') as value,
@@ -110,6 +116,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           parse_json(url_tags) as url_tags
       from required_fields
@@ -120,6 +127,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           url_tags.value:key::string as key,
           url_tags.value:value::string as value,
@@ -136,6 +144,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           explode(from_json(url_tags, 'array<struct<key:STRING, value:STRING, type:STRING>>')) as url_tags
       from required_fields
@@ -146,6 +155,7 @@
 
       select
           _fivetran_id,
+          clerk_org_id,
           creative_id,
           url_tags.key as key,
           url_tags.value as value,
